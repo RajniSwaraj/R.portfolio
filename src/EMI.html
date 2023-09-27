@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Calculator</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script tpye="text/javascript">
+        function amountchange(){
+            document.getElementById("txtamount").value= document.getElementById("rangeamount").value;
+        }
+        function yearchange(){
+            document.getElementById("txtyear").value= document.getElementById("rangeyear").value;
+        }
+        function ratechange(){
+            document.getElementById("txtrate").value= document.getElementById("rangerate").value;
+        }
+        function calculateClick(){
+             var p = parseFloat(document.getElementById("txtamount").value);
+             var r = parseFloat(document.getElementById("txtrate").value)/12/100;
+             var n = parseInt(document.getElementById("txtyear").value)*12;
+             var EMI = p*r/(1-(Math.pow(1/(1+r),n)));
+             document.getElementById("result").innerHTML = `EMI Amount &#8377; ${Math.round(EMI)} per month`;
+        }
+    </script>
+</head>
+<body class="container-fluid">
+   <div class=" border border-3  border-primary p-3 mt-2">
+    <h2> PERSONAL LOAN EMI CALCULATOR</h2>
+    <div class="row">
+        <div class="col">
+            <div class="input-group">
+                <span class="input-group-text">  Amount you need</span>
+                <input type="text" id="txtamount">
+        
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group">
+                <span class="input-group-text">For year</span>
+                <input type="text" size="8" id="txtyear">
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group">
+                <span class="input-group-text">Interest rate</span>
+                <input type="text" id="txtrate">
+            </div>
+        </div>
+
+
+    </div> 
+
+    <div class="row mt-3">
+        <div class="col">
+            &#8377; 5000/- 
+            <input type="range" min="5000" onchange="amountchange()"  id="rangeamount" max="100000" value="5000">
+            &#8377; 100000/- 
+        </div>
+        <div class="col">
+            1
+            <input type="range" min="1" max="5" step="1" onchange="yearchange()" id="rangeyear" value="1">
+            5
+        </div>
+        <div class="col">
+             10%
+             <input type="range" min="10" max="15" step="0.1"  onchange="ratechange()"value="10" id="rangerate">
+             15%
+        </div>
+        
+
+    </div>
+    <div class="d-flex justify-content-center align-item-center mt-5" >
+    <button class="btn btn-primary" onclick="calculateClick()">Calculate EMI</button>
+    </div> 
+   </div>
+   <div class="mt-4" >
+    <h2 id="result" class="text-center"> </h2>
+   </div>
+    
+</body>
+</html>
